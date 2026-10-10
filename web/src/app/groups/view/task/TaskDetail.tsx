@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowRight, CalendarDays, Check, CheckCircle2, ChevronRight, ClipboardList, Download, FileText, GitBranch, Link2, MessageCircle, Paperclip, Plus, RotateCcw, Send, Settings2, Users } from "lucide-react";
 import WorkspaceShell from "@/components/WorkspaceShell";
 import { getSupabase } from "@/lib/supabase";
+import { groupChatHref, groupHref } from "@/lib/paths";
 import { useViewer } from "@/lib/use-viewer";
 import type { Attachment, Group, Issue, IssueComment, Profile, ReviewDecision, Submission, SubmissionVersion, Task } from "@/lib/types";
 import styles from "./page.module.css";
@@ -390,7 +391,7 @@ export default function TaskDetail({ groupId, taskId }: { groupId: string; taskI
       {error && <div className={styles.error} role="alert">{error}</div>}
       {task && group && <>
         <div className={styles.taskTop}>
-          <Link href={`/groups/${group.id}`} className={styles.back}>群组大任务 <ChevronRight size={14} /> {task.title}</Link>
+          <Link href={groupHref(group.id)} className={styles.back}>群组大任务 <ChevronRight size={14} /> {task.title}</Link>
           <span className={`${styles.taskStatus} ${styles[task.status] || ""}`}>{taskStatusLabel(task.status)}</span>
         </div>
         <div className={styles.trail} aria-label="任务进度">
@@ -495,7 +496,7 @@ export default function TaskDetail({ groupId, taskId }: { groupId: string; taskI
               {task.external_delivery_note && <p className={styles.deliveryNote}>{task.external_delivery_note}</p>}
               {task.status === "accepted" && (canCoordinate || canAccept) && <form className={styles.deliveryForm} onSubmit={recordDelivery}><label>交付链接 <small>可选</small><input type="url" value={deliveryUrl} onChange={(event) => setDeliveryUrl(event.target.value)} placeholder="https://…" /></label><label>交付记录 <small>可选</small><textarea value={deliveryNote} onChange={(event) => setDeliveryNote(event.target.value)} rows={3} placeholder="例如：10 月 12 日已提交至比赛官网" /></label><button type="submit" disabled={busy || (!deliveryUrl.trim() && !deliveryNote.trim())}>保存交付记录</button></form>}
             </section>}
-            <Link className={styles.chatJump} href={`/groups/${group.id}/chat`}><MessageCircle size={17} /><div><strong>去群聊讨论</strong><span>快速交流留在群聊，结论写回 Issue。</span></div><ArrowRight size={16} /></Link>
+            <Link className={styles.chatJump} href={groupChatHref(group.id)}><MessageCircle size={17} /><div><strong>去群聊讨论</strong><span>快速交流留在群聊，结论写回 Issue。</span></div><ArrowRight size={16} /></Link>
           </aside>
         </div>
       </>}

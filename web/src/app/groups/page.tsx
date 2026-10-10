@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowRight, Hash, Plus, Search, Users } from "lucide-react";
 import WorkspaceShell from "@/components/WorkspaceShell";
 import { getSupabase } from "@/lib/supabase";
+import { groupHref } from "@/lib/paths";
 import { useViewer } from "@/lib/use-viewer";
 import type { Group, Profile } from "@/lib/types";
 import styles from "./page.module.css";
@@ -109,7 +110,7 @@ export default function GroupsPage() {
       </div>
 
       <div className={styles.groupGrid}>
-        {groups.map((group) => <Link href={`/groups/${group.id}`} key={group.id} className={styles.groupCard}>
+        {groups.map((group) => <Link href={groupHref(group.id)} key={group.id} className={styles.groupCard}>
           <div className={styles.groupCardTop}><span className={styles.groupIcon}>{group.name.slice(0, 1)}</span><ArrowRight size={18} aria-hidden="true" /></div>
           <h3>{group.name}</h3>
           <p>{group.description || "把这次团队合作的事情放进来。"}</p>

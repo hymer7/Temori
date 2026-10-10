@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowRight, Bell, Check, Clock3, RefreshCw, RotateCcw, Users, X } from "lucide-react";
 import WorkspaceShell from "@/components/WorkspaceShell";
 import { getSupabase } from "@/lib/supabase";
+import { taskHref } from "@/lib/paths";
 import type { Group, Profile, Submission, Task } from "@/lib/types";
 import { useViewer } from "@/lib/use-viewer";
 import styles from "./page.module.css";
@@ -256,7 +257,7 @@ export default function InboxPage() {
         <section className={styles.section} aria-labelledby="review-heading">
           <div className={styles.sectionHead}><span className={styles.sectionIcon}><Clock3 size={18} /></span><div><h2 id="review-heading">等待你审阅</h2><p>检查成果，再决定通过或要求修改</p></div><span className={styles.count}>{reviewItems.length}</span></div>
           <div className={styles.items}>
-            {reviewItems.map(({ submission, task, group }) => <Link href={`/groups/${group.id}/tasks/${task.id}`} className={styles.cardLink} key={submission.id}>
+            {reviewItems.map(({ submission, task, group }) => <Link href={taskHref(group.id, task.id)} className={styles.cardLink} key={submission.id}>
               <span className={styles.meta}>{group.name} · {formatDate(submission.created_at)}</span>
               <h3>{task.title}</h3>
               <p>{submission.kind === "final" ? "最终成果待你验收" : "Issue 成果待你审阅"}</p>
@@ -269,7 +270,7 @@ export default function InboxPage() {
         <section className={styles.section} aria-labelledby="revision-heading">
           <div className={styles.sectionHead}><span className={styles.sectionIcon}><RotateCcw size={18} /></span><div><h2 id="revision-heading">需要修改</h2><p>你的提交或你协调的任务收到了意见</p></div><span className={styles.count}>{revisionItems.length}</span></div>
           <div className={styles.items}>
-            {revisionItems.map(({ submission, task, group, comment }) => <Link href={`/groups/${group.id}/tasks/${task.id}`} className={styles.cardLink} key={submission.id}>
+            {revisionItems.map(({ submission, task, group, comment }) => <Link href={taskHref(group.id, task.id)} className={styles.cardLink} key={submission.id}>
               <span className={styles.meta}>{group.name} · {submission.kind === "final" ? "最终成果" : "Issue 成果"}</span>
               <h3>{task.title}</h3>
               {comment && <p className={styles.feedback}>“{comment}”</p>}

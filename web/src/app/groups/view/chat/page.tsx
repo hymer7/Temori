@@ -1,6 +1,8 @@
 "use client";
 
-import { use, useCallback, useEffect, useRef, useState, type FormEvent } from "react";
+import { Suspense, useCallback, useEffect, useRef, useState, type FormEvent } from "react";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { MessageCircle, Send } from "lucide-react";
 import WorkspaceShell from "@/components/WorkspaceShell";
 import { getSupabase } from "@/lib/supabase";
@@ -17,8 +19,17 @@ type Message = {
   created_at: string;
 };
 
-export default function GroupChatPage({ params }: { params: Promise<{ groupId: string }> }) {
-  const { groupId } = use(params);
+export default function GroupChatPage() {
+  return <Suspense fallback={<p>正在载入群聊…</p>}><GroupChatRoute /></Suspense>;
+}
+
+function GroupChatRoute() {
+  const groupId = useSearchParams().get("groupId");
+  if (!groupId) return <p>缺少群组编号。<Link href="/groups">返回我的群组</Link></p>;
+  return <GroupChatContent groupId={groupId} />;
+}
+
+function GroupChatContent({ groupId }: { groupId: string }) {
   const { user, loading: viewerLoading, configured } = useViewer();
   const [groups, setGroups] = useState<Group[]>([]);
   const [group, setGroup] = useState<Group | null>(null);

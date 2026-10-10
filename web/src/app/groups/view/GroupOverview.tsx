@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowRight, CalendarDays, Check, ClipboardList, Copy, MessageCircle, Plus } from "lucide-react";
 import WorkspaceShell from "@/components/WorkspaceShell";
 import { getSupabase } from "@/lib/supabase";
+import { groupChatHref, taskHref } from "@/lib/paths";
 import { useViewer } from "@/lib/use-viewer";
 import type { Group, Task } from "@/lib/types";
 import styles from "./page.module.css";
@@ -87,14 +88,14 @@ export default function GroupOverview({ groupId }: { groupId: string }) {
           <div className={styles.metaItem}><span>群号</span><button type="button" onClick={copyGroupNumber} title="复制群号"><strong>{group.group_number}</strong><Copy size={14} /></button></div>
           <div className={styles.metaItem}><span>成员</span><strong>{memberCount} 人</strong></div>
           <div className={styles.metaItem}><span>你的身份</span><strong>{group.owner_id === user?.id ? "群主" : "组员"}</strong></div>
-          <Link href={`/groups/${group.id}/chat`} className={styles.chatLink}><MessageCircle size={16} /> 打开群聊 <ArrowRight size={16} /></Link>
+          <Link href={groupChatHref(group.id)} className={styles.chatLink}><MessageCircle size={16} /> 打开群聊 <ArrowRight size={16} /></Link>
         </div>
 
         <div className={styles.columns}>
           <section className={styles.taskSection} aria-labelledby="tasks-title">
             <div className={styles.sectionHead}><div><span className={styles.kicker}>TASK ARCHIVE</span><h2 id="tasks-title">大任务</h2></div><span>{tasks.length} 项</span></div>
             {tasks.length === 0 ? <div className={styles.empty}><ClipboardList size={25} /><strong>还没有大任务</strong><p>把你们正在做的第一件事写下来。简单任务可以直接提交成果。</p></div> :
-              <div className={styles.taskList}>{tasks.map((task) => <Link key={task.id} href={`/groups/${group.id}/tasks/${task.id}`} className={styles.taskCard}>
+              <div className={styles.taskList}>{tasks.map((task) => <Link key={task.id} href={taskHref(group.id, task.id)} className={styles.taskCard}>
                 <div><span className={`${styles.status} ${styles[task.status] || ""}`}>{statusLabel(task.status)}</span>{task.due_at && <span className={styles.due}><CalendarDays size={13} /> {new Date(task.due_at).toLocaleDateString("zh-CN")}</span>}</div>
                 <h3>{task.title}</h3><p>{task.description || "暂无说明"}</p>
                 <span className={styles.enter}>查看任务 <ArrowRight size={15} /></span>

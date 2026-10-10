@@ -1,10 +1,12 @@
 "use client";
 
-import { use, useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { ArrowLeft, Crown, Hash, Users } from "lucide-react";
 import WorkspaceShell from "@/components/WorkspaceShell";
 import { getSupabase } from "@/lib/supabase";
+import { groupHref } from "@/lib/paths";
 import { useViewer } from "@/lib/use-viewer";
 import type { Group, Profile } from "@/lib/types";
 import styles from "./page.module.css";
@@ -16,8 +18,17 @@ type GroupMember = {
   joined_at: string;
 };
 
-export default function GroupMembersPage({ params }: { params: Promise<{ groupId: string }> }) {
-  const { groupId } = use(params);
+export default function GroupMembersPage() {
+  return <Suspense fallback={<p>正在载入成员…</p>}><GroupMembersRoute /></Suspense>;
+}
+
+function GroupMembersRoute() {
+  const groupId = useSearchParams().get("groupId");
+  if (!groupId) return <p>缺少群组编号。<Link href="/groups">返回我的群组</Link></p>;
+  return <GroupMembersContent groupId={groupId} />;
+}
+
+function GroupMembersContent({ groupId }: { groupId: string }) {
   const { user, loading: viewerLoading, configured } = useViewer();
   const [groups, setGroups] = useState<Group[]>([]);
   const [group, setGroup] = useState<Group | null>(null);
@@ -131,7 +142,7 @@ export default function GroupMembersPage({ params }: { params: Promise<{ groupId
             </div>;
           })}
         </section>
-        <Link href={`/groups/${groupId}`} className={styles.back}><ArrowLeft size={15} aria-hidden="true" /> 返回大任务</Link>
+        <Link href={groupHref(groupId)} className={styles.back}><ArrowLeft size={15} aria-hidden="true" /> 返回大任务</Link>
       </>}
     </WorkspaceShell>
   );

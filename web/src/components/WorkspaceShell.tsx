@@ -5,6 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { Bell, ChevronDown, ClipboardList, Home, LogOut, MessageCircle, Users } from "lucide-react";
 import type { ReactNode } from "react";
 import { getSupabase } from "@/lib/supabase";
+import { groupChatHref, groupHref, groupMembersHref } from "@/lib/paths";
 import type { Group } from "@/lib/types";
 import styles from "./WorkspaceShell.module.css";
 
@@ -20,7 +21,7 @@ type Props = {
 export default function WorkspaceShell({ children, groups, currentGroup, email, title, subtitle }: Props) {
   const path = usePathname();
   const router = useRouter();
-  const groupBase = currentGroup ? `/groups/${currentGroup.id}` : "/groups";
+  const groupBase = currentGroup ? groupHref(currentGroup.id) : "/groups";
 
   async function signOut() {
     await getSupabase()?.auth.signOut();
@@ -39,13 +40,13 @@ export default function WorkspaceShell({ children, groups, currentGroup, email, 
             <Home size={18} aria-hidden="true" /><span>我的群组</span>
           </Link>
           {currentGroup && <>
-            <Link href={groupBase} className={path === groupBase ? styles.active : ""}>
+            <Link href={groupBase} className={path === "/groups/view" ? styles.active : ""}>
               <ClipboardList size={18} aria-hidden="true" /><span>大任务</span>
             </Link>
-            <Link href={`${groupBase}/chat`} className={path.endsWith("/chat") ? styles.active : ""}>
+            <Link href={groupChatHref(currentGroup.id)} className={path === "/groups/view/chat" ? styles.active : ""}>
               <MessageCircle size={18} aria-hidden="true" /><span>群聊</span>
             </Link>
-            <Link href={`${groupBase}/members`} className={path.endsWith("/members") ? styles.active : ""}>
+            <Link href={groupMembersHref(currentGroup.id)} className={path === "/groups/view/members" ? styles.active : ""}>
               <Users size={18} aria-hidden="true" /><span>成员</span>
             </Link>
           </>}
@@ -56,7 +57,7 @@ export default function WorkspaceShell({ children, groups, currentGroup, email, 
         {groups.length > 0 && <>
           <div className={styles.sideSectionLabel}>已加入的群组</div>
           <nav aria-label="群组列表" className={styles.groupList}>
-            {groups.map((group) => <Link key={group.id} href={`/groups/${group.id}`} className={currentGroup?.id === group.id ? styles.selectedGroup : ""}>
+            {groups.map((group) => <Link key={group.id} href={groupHref(group.id)} className={currentGroup?.id === group.id ? styles.selectedGroup : ""}>
               <span className={styles.groupDot}>{group.name.slice(0, 1)}</span>
               <span className={styles.groupName}>{group.name}</span>
             </Link>)}

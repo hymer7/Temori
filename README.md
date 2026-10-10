@@ -19,6 +19,6 @@
 
 ## 当前状态
 
-首版网页代码已放在 [web/](web/)，包含桌面优先的页面、Supabase 数据库迁移与权限规则、邮箱一次性验证码登录接入，以及 [本地运行和部署步骤](web/README.md)。生产构建已通过；Supabase 项目、自定义 SMTP 和 Vercel 账号仍需配置，尚未完成真实邮箱登录与线上试用。
+首版网页代码已放在 [web/](web/)，包含桌面优先的页面、Supabase 数据库迁移与权限规则，以及邮箱一次性验证码登录接入。网站采用静态导出，准备通过 GitHub Pages 发布公开预览；[发布步骤](web/README.md) 已写好。Supabase 数据库迁移、邮件投递和真实用户登录尚未启用，因此线上预览目前只展示界面和流程。
 
 宏观流程草案见 [FLOW.md](FLOW.md)，开发顺序见 [ROADMAP.md](ROADMAP.md)，手动验收清单见 [web/TESTING.md](web/TESTING.md)。
