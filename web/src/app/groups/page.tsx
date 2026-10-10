@@ -98,7 +98,7 @@ export default function GroupsPage() {
 
   return (
     <WorkspaceShell groups={groups} email={user?.email} title="我的群组" subtitle="和同学在一个地方沟通、提交、审阅和完成任务。">
-      {!configured && <div className={styles.setup} role="status"><strong>还差一步接入服务</strong><span>网站页面可以预览。配置 Supabase 地址与密钥后，邮箱登录和群组数据即可使用；见 web/README.md。</span></div>}
+      {!configured && <div className={styles.setup} role="status"><strong>试用即将开放</strong><span>团队空间正在准备中。开放后，你就能创建群组并邀请同学一起协作。</span></div>}
       {loading && <p className={styles.hint}>正在加载群组…</p>}
       {message && <p className={styles.notice} role="status">{message}</p>}
       {error && <p className={styles.error} role="alert">{error}</p>}

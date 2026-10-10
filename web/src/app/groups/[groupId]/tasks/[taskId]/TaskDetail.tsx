@@ -383,7 +383,7 @@ export default function TaskDetail({ groupId, taskId }: { groupId: string; taskI
 
   return (
     <WorkspaceShell groups={groups} currentGroup={group} email={user?.email} title={task?.title || "大任务"} subtitle={task?.description || "任务说明、分工、成果和验收都在这里。"}>
-      {!configured && <div className={styles.notice} role="status">请先按 web/README.md 配置 Supabase，再登录使用大任务。</div>}
+      {!configured && <div className={styles.notice} role="status">团队空间正在准备中，试用开放后即可查看大任务。</div>}
       {configured && (loading || dataLoading) && <p className={styles.muted}>正在载入大任务…</p>}
       {!loading && !dataLoading && configured && (!group || !task) && <div className={styles.error} role="alert">没有找到这个任务，或你没有访问权限。<Link href="/groups">返回群组</Link></div>}
       {notice && <div className={styles.notice} role="status">{notice}</div>}

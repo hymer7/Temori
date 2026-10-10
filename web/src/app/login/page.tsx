@@ -99,8 +99,8 @@ export default function LoginPage() {
             <div className={styles.setup} role="status">
               <ShieldCheck size={21} aria-hidden="true" />
               <div>
-                <strong>网站界面已就绪</strong>
-                <p>接入 Supabase 项目后即可使用真实邮箱登录。配置步骤见 web/README.md。</p>
+                <strong>Temori 即将开放试用</strong>
+                <p>团队空间正在准备中。开放后，你就能用邮箱验证码进入。</p>
               </div>
             </div>
           ) : step === "email" ? (

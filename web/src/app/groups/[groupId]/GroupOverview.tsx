@@ -77,7 +77,7 @@ export default function GroupOverview({ groupId }: { groupId: string }) {
 
   return (
     <WorkspaceShell groups={groups} currentGroup={group} email={user?.email} title={group?.name || "群组"} subtitle={group?.description || "在这里把小组任务推进到完成。"}>
-      {!configured && <div className={styles.notice} role="status">请先按 web/README.md 配置 Supabase，再登录使用群组。</div>}
+      {!configured && <div className={styles.notice} role="status">团队空间正在准备中，试用开放后即可进入群组。</div>}
       {configured && (loading || dataLoading) && <p className={styles.hint}>正在载入群组…</p>}
       {!loading && !dataLoading && configured && !group && <div className={styles.error} role="alert">未找到群组，或你还没有加入。<Link href="/groups">返回我的群组</Link></div>}
       {message && <div className={styles.notice} role="status">{message}</div>}

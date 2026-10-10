@@ -96,7 +96,7 @@ export default function GroupMembersPage({ params }: { params: Promise<{ groupId
 
   return (
     <WorkspaceShell groups={groups} currentGroup={visibleGroup} email={user?.email} title="群组成员" subtitle="查看和你一起完成任务的同学。">
-      {!configured && <p className={styles.notice} role="status">配置 Supabase 后即可查看群组成员。</p>}
+      {!configured && <p className={styles.notice} role="status">试用开放后即可查看群组成员。</p>}
       {(viewerLoading || loading) && configured && <p className={styles.notice} role="status">正在加载成员…</p>}
       {error && <p className={styles.error} role="alert">{error}</p>}
       {visibleGroup && <>

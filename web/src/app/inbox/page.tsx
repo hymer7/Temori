@@ -217,7 +217,7 @@ export default function InboxPage() {
 
   return (
     <WorkspaceShell groups={groups} email={user?.email} title="待处理" subtitle="需要你做决定、审阅或修改的事项都在这里。">
-      {!configured && <div className={styles.setup} role="status"><strong>还差一步接入服务</strong><span>配置 Supabase 后，这里会显示真实的团队待办。设置方法见 web/README.md。</span></div>}
+      {!configured && <div className={styles.setup} role="status"><strong>试用即将开放</strong><span>开放后，你需要处理的入群申请、审阅和修改事项会集中显示在这里。</span></div>}
       {error && <p className={styles.error} role="alert">{error}</p>}
       {notice && <p className={styles.notice} role="status">{notice}</p>}
 

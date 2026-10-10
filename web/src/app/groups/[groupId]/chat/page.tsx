@@ -117,7 +117,7 @@ export default function GroupChatPage({ params }: { params: Promise<{ groupId: s
 
   return (
     <WorkspaceShell groups={groups} currentGroup={visibleGroup} email={user?.email} title="群聊" subtitle="在这里快速沟通；重要的分工和决定可以整理到 Issue。">
-      {!configured && <p className={styles.notice} role="status">配置 Supabase 后即可使用群聊。</p>}
+      {!configured && <p className={styles.notice} role="status">试用开放后即可使用群聊。</p>}
       {(viewerLoading || loading) && configured && <p className={styles.notice} role="status">正在加载群聊…</p>}
       {error && <p className={styles.error} role="alert">{error}</p>}
       {visibleGroup && <section className={styles.chat} aria-label={`${visibleGroup.name}群聊`}>
