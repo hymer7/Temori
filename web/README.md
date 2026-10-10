@@ -21,13 +21,13 @@ npm ci
    ```
 
    不要提交 `.env.local`，也不要把 `service_role` 或 secret key 填进 `NEXT_PUBLIC_` 变量。
-3. 在 **Authentication → Providers** 确认 Email 已启用。在 **Authentication → Email Templates → Magic Link** 将邮件正文改为包含 `{{ .Token }}` 的验证码，例如：
+3. 在 **Authentication → Providers** 确认 Email 已启用。在 **Authentication → Email Templates** 将 **Magic Link / OTP** 和 **Confirm signup** 两个模板都改为显示 `{{ .Token }}`，例如：
 
    ```html
    <p>你的 Temori 登录验证码：<strong>{{ .Token }}</strong></p>
    ```
 
-   这一步不可省：代码调用 `signInWithOtp`，但 Supabase 默认模板发送的是登录链接；改模板后才会收到页面要求输入的六位验证码。
+   这一步不可省：代码调用 `signInWithOtp`，默认模板可能发送登录链接；首次使用的新邮箱还可能收到注册确认模板。两个模板都使用验证码后，分别测试新邮箱和已注册邮箱。
 4. 在 **Authentication → URL Configuration** 将 Site URL 设为本地地址 `http://localhost:3000`，上线后再改为正式域名。
 5. 运行 `npm run dev`，打开 [http://localhost:3000/login](http://localhost:3000/login)，用项目团队成员邮箱试收验证码。
 
@@ -35,7 +35,7 @@ npm ci
 
 ## 部署到 Vercel
 
-1. 将代码推送到 GitHub，在 [Vercel](https://vercel.com/new) 导入 Temori 仓库。项目的 **Root Directory** 选择 `web`，框架使用 Next.js。这个仓库的 `package.json` 位于 `web/`，不能把仓库根目录当作网站根目录。
+1. 将代码推送到 GitHub，用拥有 `hymer7/Temori` 的 GitHub 账号登录 [Vercel](https://vercel.com/new)，授权 Vercel GitHub App 访问 Temori 私人仓库后导入。项目的 **Root Directory** 选择 `web`，框架使用 Next.js。这个仓库的 `package.json` 位于 `web/`，不能把仓库根目录当作网站根目录。
 2. 在 Vercel 项目的 **Environment Variables** 中设置 `NEXT_PUBLIC_SUPABASE_URL` 和 `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`，值与本地 `.env.local` 相同。给 Production 环境设置；若要使用 Preview 部署，也给 Preview 设置。添加或修改变量后重新部署。
 3. 在 Supabase **Authentication → URL Configuration** 将 Site URL 改为正式 `https://...` 网站地址。若使用需要跳转的邮件链接，再按实际域名配置 Redirect URLs；当前登录界面直接输入验证码。
 4. 在 Supabase **Authentication → SMTP Settings** 配置邮件服务商提供的 SMTP 主机、端口、用户名、密码和发件地址。用一个**不属于 Supabase 项目团队**的邮箱测试收信、验证码登录；测试垃圾邮件箱和常见邮箱。
