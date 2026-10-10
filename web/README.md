@@ -4,14 +4,9 @@ Temori 是给学生团队使用的协作网站。首版包含邮箱验证码登�
 
 ## 公开预览：GitHub Pages
 
-本仓库的 [Pages 工作流](../.github/workflows/pages.yml) 会在 `main` 更新时构建 `web/`，把 `web/out/` 发布为静态网站。GitHub Free 的 Pages 要求仓库公开；公开后，**当前文件和过去的提交记录都能被任何人查看**。发布前检查整个仓库不含私钥、密码和私人资料。
+网站已上线：[https://hymer7.github.io/Temori/](https://hymer7.github.io/Temori/)。本仓库的 [Pages 工作流](../.github/workflows/pages.yml) 会在 `main` 更新时构建 `web/`，把 `web/out/` 发布为静态网站。GitHub Free 的 Pages 要求仓库公开；**当前文件和过去的提交记录都能被任何人查看**，所以不要提交私钥、密码和私人资料。
 
-首次发布按以下顺序操作：
-
-1. 打开 [hymer7/Temori](https://github.com/hymer7/Temori) → **Settings → General → Danger Zone → Change repository visibility**，改为 **Public**。
-2. 打开 **Settings → Pages**，在 **Build and deployment → Source** 中选择 **GitHub Actions**。
-3. 打开 **Actions → Publish Temori to GitHub Pages → Run workflow**，选择 `main` 运行一次。以后推送到 `main` 会自动重新发布。
-4. 等待 `build` 和 `deploy` 都成功，再从 **Settings → Pages → Visit site** 打开网站。项目网站预计位于 [https://hymer7.github.io/Temori/](https://hymer7.github.io/Temori/)。
+更新网站：将改动推送到 `main`，等待 **Actions → Publish Temori to GitHub Pages** 的 `build` 和 `deploy` 都成功。若要重新手动发布，可以在该工作流页面选择 **Run workflow**，分支选 `main`。打开 **Settings → Pages → Visit site** 可以查看正式地址。
 
 目前这是**界面和流程预览**。GitHub Pages 不提供服务器和数据库；在 Supabase 迁移、邮箱投递和访问规则完成前，真实登录、建群、聊天、任务和上传不可用。不要把 `service_role`、数据库密码或邮件服务密码写进仓库或 GitHub Actions 变量。
 
