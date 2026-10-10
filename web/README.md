@@ -1,6 +1,6 @@
 # Temori 网页端
 
-Temori 是给学生团队使用的协作网站。首版包含邮箱验证码登录、建群与群号入群、群聊、大任务、可选 Issue 分工、成果版本、审阅验收和附件。网页代码在本目录，数据库迁移在 [`supabase/migrations/20261010_init.sql`](supabase/migrations/20261010_init.sql)。
+Temori 是给学生团队使用的协作网站。首版包含邮箱验证码登录、建群与群号入群、群聊、大任务、可选 Issue 分工、成果版本、审阅验收和附件。网页代码在本目录，数据库迁移在 [`supabase/migrations/20261010133800_init.sql`](supabase/migrations/20261010133800_init.sql)。
 
 ## 本地运行
 
@@ -13,7 +13,7 @@ npm ci
 
 此时运行 `npm run dev`，可以在 [http://localhost:3000](http://localhost:3000) 查看首页和登录界面。要使用真实登录、群组和任务，还需要配置 Supabase：
 
-1. [创建 Supabase 项目](https://supabase.com/dashboard/projects)。在项目的 SQL Editor 中执行 [`supabase/migrations/20261010_init.sql`](supabase/migrations/20261010_init.sql) 的完整内容。它会创建数据表、访问规则、函数和私有附件 bucket；一个项目只执行一次。
+1. [创建 Supabase 项目](https://supabase.com/dashboard/projects)。在项目的 SQL Editor 中执行 [`supabase/migrations/20261010133800_init.sql`](supabase/migrations/20261010133800_init.sql) 的完整内容。它会创建数据表、访问规则、函数和私有附件 bucket；一个项目只执行一次。
 2. 在 **Project Settings → API Keys** 找到项目 URL 和 **publishable key**。在 `web/` 下复制 `.env.example` 为 `.env.local`，填入这两个值：
 
    ```bash

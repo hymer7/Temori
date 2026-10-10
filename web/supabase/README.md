@@ -4,7 +4,7 @@
 
 ## 先配置 Supabase
 
-1. 创建一个 Supabase 项目，在 SQL Editor 中执行 [`migrations/20261010_init.sql`](migrations/20261010_init.sql) 的完整内容。已有项目也可从 `web/` 使用 Supabase CLI 的 `supabase link`、`supabase db push` 应用迁移。迁移只应执行一次。
+1. 创建一个 Supabase 项目，在 SQL Editor 中执行 [`migrations/20261010133800_init.sql`](migrations/20261010133800_init.sql) 的完整内容。已有项目也可从 `web/` 使用 Supabase CLI 的 `supabase link`、`supabase db push` 应用迁移。迁移只应执行一次。
 2. 在 Authentication → Providers 保持 Email 启用。若产品要显示**六位邮箱验证码**，在 Authentication → Email Templates 的 **Magic Link / OTP** 和 **Confirm signup** 模板中都使用 `{{ .Token }}`；首次注册与再次登录分别测试。仅调用 `signInWithOtp`、保留默认模板时，可能收到登录链接。
 3. 要让普通同学注册，配置自定义 SMTP 与发件地址。Supabase 默认邮件服务仅向项目团队成员邮箱发送邮件，不能用于班级试用。上线后检查验证码邮件能否到达常见邮箱。
 4. 在网页端的环境变量中配置 `NEXT_PUBLIC_SUPABASE_URL` 和 `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`。正式部署时在托管平台填写同名变量，并在 Supabase Authentication → URL Configuration 配置正式站点地址。
