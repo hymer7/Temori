@@ -1,0 +1,34 @@
+.shell { display: grid; grid-template-columns: 244px minmax(0, 1fr); min-height: 100vh; background: var(--background, #f5f7fb); color: var(--foreground, #1b2a41); }
+.sidebar { position: sticky; top: 0; height: 100vh; background: var(--surface, #fff); border-right: 1px solid var(--border, #dce4ec); display: flex; flex-direction: column; padding: 28px 15px 16px; }
+.brand { display: inline-flex; align-items: center; gap: 10px; margin: 0 13px 42px; font-family: var(--font-display, Arial, sans-serif); font-size: 25px; font-weight: 750; letter-spacing: -.05em; }
+.brandMark { width: 33px; height: 33px; display: grid; place-items: center; background: var(--brand, #176b8e); border-radius: 9px; color: #fff; padding-bottom: 3px; font-size: 23px; }
+.sideSectionLabel { margin: 0 13px 10px; color: #92a0ae; font-size: 10px; font-weight: 750; letter-spacing: .12em; }
+.nav { display: flex; flex-direction: column; gap: 3px; margin-bottom: 32px; }
+.nav a { display: flex; align-items: center; gap: 13px; height: 43px; padding: 0 13px; border-radius: 9px; color: #64758a; font-size: 13px; font-weight: 580; }
+.nav a:hover, .groupList a:hover { background: #f1f6f8; color: #174b67; }
+.nav a.active { background: #e9f3f7; color: var(--brand, #176b8e); font-weight: 750; }
+.groupList { display: flex; flex-direction: column; gap: 3px; overflow-y: auto; min-height: 0; }
+.groupList a { display: flex; align-items: center; gap: 10px; min-height: 39px; padding: 4px 10px; border-radius: 9px; color: #52647b; font-size: 12px; }
+.groupList a.selectedGroup { background: #f0f6fa; color: #174b67; font-weight: 700; }
+.groupDot { width: 25px; height: 25px; flex: none; display: grid; place-items: center; background: #ddeef2; color: #225e76; border-radius: 7px; font-size: 12px; font-weight: 800; }
+.groupName { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sidebarFoot { margin-top: auto; padding: 15px 4px 0; border-top: 1px solid var(--border, #dce4ec); display: flex; align-items: center; gap: 9px; min-width: 0; }
+.avatar { width: 33px; height: 33px; border-radius: 50%; flex: none; display: grid; place-items: center; background: #d6e9f0; color: #225e76; font-size: 13px; font-weight: 800; }
+.account { min-width: 0; display: flex; flex-direction: column; line-height: 1.35; }
+.account strong, .account span { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.account strong { font-size: 12px; }
+.account span { color: #96a3b0; font-size: 10px; }
+.sidebarFoot button { border: 0; background: none; color: #8b9aa9; cursor: pointer; padding: 6px; margin-left: auto; }
+.sidebarFoot button:hover { color: #a54436; }
+.main { min-width: 0; }
+.topbar { min-height: 110px; border-bottom: 1px solid var(--border, #dce4ec); padding: 28px clamp(24px, 4vw, 64px); display: flex; align-items: center; justify-content: space-between; gap: 20px; background: #fff; }
+.topCopy { min-width: 0; }
+.breadcrumb { display: flex; align-items: center; gap: 7px; color: #8a99a9; font-size: 11px; margin-bottom: 8px; }
+.breadcrumb svg { transform: rotate(-90deg); }
+.breadcrumb a:hover { color: var(--brand, #176b8e); }
+.topbar h1 { font-size: clamp(23px, 2.2vw, 32px); line-height: 1.2; letter-spacing: -.05em; font-weight: 730; }
+.topbar p { color: #7c8c9e; font-size: 12px; margin-top: 6px; }
+.topAction { width: 37px; height: 37px; border: 1px solid var(--border, #dce4ec); background: #fff; border-radius: 10px; display: grid; place-items: center; color: #697b8c; }
+.topAction:hover { color: var(--brand, #176b8e); background: #eef7fa; }
+.content { padding: 33px clamp(24px, 4vw, 64px) 70px; max-width: 1580px; margin: 0 auto; }
+@media (max-width: 850px) { .shell { grid-template-columns: 1fr; } .sidebar { position: static; height: auto; display: block; padding: 14px 16px; border-right: 0; border-bottom: 1px solid var(--border, #dce4ec); } .brand { margin: 0 0 12px; } .sideSectionLabel, .groupList, .sidebarFoot { display: none; } .nav { flex-direction: row; overflow-x: auto; margin: 0; padding-bottom: 2px; } .nav a { flex: none; gap: 7px; padding: 0 10px; height: 36px; font-size: 12px; } .nav svg { width: 15px; } .topbar { min-height: 90px; padding: 20px; } .content { padding: 22px 18px 55px; } }

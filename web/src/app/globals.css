@@ -1,0 +1,27 @@
+:root {
+  --background: #f5f8fb;
+  --foreground: #1b2b42;
+  --surface: #ffffff;
+  --surface-muted: #edf3f7;
+  --muted: #627489;
+  --border: #dce5ed;
+  --brand: #176e8b;
+  --brand-dark: #105671;
+  --brand-soft: #e3f1f5;
+  --success: #207e70;
+  --warning: #aa652b;
+  --danger: #b7534e;
+  --font-body: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+  --font-display: "Avenir Next", "Trebuchet MS", "PingFang SC", sans-serif;
+  --shadow-card: 0 20px 60px rgba(30, 55, 76, 0.09);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { min-height: 100vh; margin: 0; color: var(--foreground); background: var(--background); font-family: var(--font-body); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+button, input, textarea, select { font: inherit; }
+button { cursor: pointer; }
+a { color: inherit; text-decoration: none; }
+::selection { color: var(--foreground); background: #cae9ef; }
+:focus-visible { outline: 3px solid var(--brand); outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
